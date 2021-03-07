@@ -46,9 +46,6 @@ export class HttpService {
       case 'year':
         this.params.launch_year = value;
         break;
-      default:
-        this.params.launch_year = value;
-        break;
     }
   }
 

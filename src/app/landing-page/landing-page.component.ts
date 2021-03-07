@@ -64,10 +64,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
    * @returns void
    */
   public getLaunchSuccess(params: string): void {
-    this.islaunchTrue = params;
-    this.httpservice.filters('launch', params);
-    this.getspaceXInfo();
-    this.router.navigate([''], { queryParams: { launch_success: params }, queryParamsHandling: 'merge' });
+    if (this.islaunchTrue === params) {
+      this.islaunchTrue = '';
+      this.removePreviousFilters('launch', 'launch_success');
+    } else {
+      this.islaunchTrue = params;
+      this.httpservice.filters('launch', params);
+      this.getspaceXInfo();
+      this.router.navigate([''], { queryParams: { launch_success: params }, queryParamsHandling: 'merge' });
+    }
   }
 
   /**
@@ -76,10 +81,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
    * @returns void
    */
   public getLandSuccess(params: string): void {
-    this.islandedTrue = params;
-    this.httpservice.filters('land', params);
-    this.getspaceXInfo();
-    this.router.navigate([''], { queryParams: { land_success: params }, queryParamsHandling: 'merge' });
+    if (this.islandedTrue === params) {
+      this.islandedTrue = '';
+      this.removePreviousFilters('land', 'land_success');
+    } else {
+      this.islandedTrue = params;
+      this.httpservice.filters('land', params);
+      this.getspaceXInfo();
+      this.router.navigate([''], { queryParams: { land_success: params }, queryParamsHandling: 'merge' });
+    }
   }
 
   /**
@@ -101,11 +111,21 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       this.getspaceXInfo();
       this.router.navigate([''], { queryParams: { launch_year: year.year }, queryParamsHandling: 'merge' });
     } else {
-      this.httpservice.filters(null, '');
-      this.getspaceXInfo();
-      delete this.router['browserUrlTree'].queryParams.launch_year;
-      this.location.replaceState(this.router.url);
+      this.removePreviousFilters('year', 'launch_year');
     }
+  }
+
+  /**
+   * method to remove previous filters
+   * @param action type of param selected
+   * @param param value of selected param
+   * @returns void
+   */
+  private removePreviousFilters(action: string, param: string): void {
+    this.httpservice.filters(action, '');
+    this.getspaceXInfo();
+    delete this.router['browserUrlTree'].queryParams[param];
+    this.location.replaceState(this.router.url);
   }
 
   /**
