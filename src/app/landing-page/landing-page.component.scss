@@ -1,0 +1,81 @@
+.mission-name {
+  color: blue;
+}
+span,li {
+  color: royalblue;
+}
+ul {
+  margin-top: 0px
+}
+.btn {
+  font-size: 12px;
+  height: 20px;
+  padding: 0px 20px;
+  border-color: white;
+  border-radius: 5px;
+  margin: 5px 15px;
+  background-color: #d4f29a;
+  border: none;
+  @media (min-width: 1024px) {
+    padding: 0px 12px;
+  }
+}
+.missions-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  @media (min-width: 1440px) {
+    min-width: 1220px;
+  }
+}
+.launch-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.card-items {
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background-color: white;
+  padding: 16px;
+  transition: all 0.2s ease-in-out;
+  margin: 4px;
+  @media screen and (max-width: 699px) {
+    width: 100%;
+  }
+  @media (min-width: 700px) and (max-width: 1023px) {
+    width: 47%;
+  }
+  @media (min-width: 1024px) {
+    width: 23%;
+  }
+}
+.card {
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+  height: fit-content;
+  @media screen and (max-width: 699px) {
+    width: 100%;
+  }
+  @media (min-width: 700px) and (max-width: 1023px) {
+    width: 47%;
+  }
+  @media (min-width: 1024px) {
+    width: 23%;
+  }
+}
+.hr-bar {
+  width: 70%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.selected {
+  background-color: yellowgreen;
+}
+.center-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

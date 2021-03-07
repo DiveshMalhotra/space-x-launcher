@@ -1,0 +1,89 @@
+<div class="p-3 bg-color">
+    <header class="m-1">
+        <h1>SpaceX Launch Programs</h1>
+    </header>
+    <div class="container-body container-center">
+        <div class="card mr-2 mt-1">
+            <h4 class="m-1">Filters</h4>
+            <div>
+                <div class="flex-box">Launch Year</div>
+                <hr class="hr-bar">
+                <div class="launch-container">
+                    <div *ngFor="let year of launchYears">
+                        <button class="btn" (click)="getFilteredYears(year)" [ngClass]="year.checked ? 'selected' : ''">
+                            {{year.year}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <div class="flex-box">Successful Launch</div>
+                <hr class="hr-bar">
+                <div class="launch-container">
+                    <button (click)="getLaunchSuccess('true')" class="btn"
+                        [ngClass]="{ 'selected': islaunchTrue == 'true' }">True</button>
+                    <button (click)="getLaunchSuccess('false')" class="btn"
+                        [ngClass]="{ 'selected': islaunchTrue == 'false' }">False</button>
+                </div>
+            </div>
+            <div class="mt-3">
+                <div class="flex-box">Successful Landing</div>
+                <hr class="hr-bar">
+                <div class="launch-container">
+                    <button (click)="getLandSuccess('true')" class="btn"
+                        [ngClass]="{ 'selected': islandedTrue == 'true' }">True</button>
+                    <button (click)="getLandSuccess('false')" class="btn"
+                        [ngClass]="{ 'selected': islandedTrue == 'false' }">False</button>
+                </div>
+            </div>
+        </div>
+        <div class="missions-container">
+            <ng-container *ngIf="spaceXLauncherData?.length; else noDataFound">
+                <div class="card-items" *ngFor="let data of spaceXLauncherData; let i = index">
+                    <img height="150px" loading="lazy" width="150px" src="{{data.links.mission_patch_small}}"
+                        class="center-img bg-color" />
+                    <div class="row m-0">
+                        <strong class="mission-name mt-3">{{data.mission_name}}#{{i+1}}</strong>
+                    </div>
+                    <div class="row m-0">
+                        <strong>Mission Ids</strong>
+                        <ul>
+                            <ng-container *ngIf="data.mission_id?.length;else notAvailable">
+                                <li *ngFor="let id of data.mission_id">
+                                    {{id}}
+                                </li>
+                            </ng-container>
+                            <ng-template #notAvailable>
+                                <li>
+                                    Not Yet Available
+                                </li>
+                            </ng-template>
+                        </ul>
+                    </div>
+                    <div class="row m-0">
+                        <strong>Launch Year:</strong>
+                        <span> {{ data.launch_year}}</span>
+                    </div>
+                    <div class="row m-0">
+                        <strong>Successful Launch:</strong>
+                        <span *ngIf="data.launch_success !== undefined && data.launch_success !== null; else na">
+                            {{data.launch_success}} </span>
+                        <ng-template #na><span>N/A</span></ng-template>
+                    </div>
+                    <div class="row m-0">
+                        <strong>Successful Landing:</strong>
+                        <span *ngIf="data.rocket.first_stage.cores[0].land_success !== undefined &&
+                        data.rocket.first_stage.cores[0].land_success !== null ; else na">
+                            {{ data.rocket.first_stage.cores[0].land_success }}</span>
+                        <ng-template #na><span>N/A</span></ng-template>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #noDataFound>
+                <h4>No Data Available!</h4>
+            </ng-template>
+        </div>
+    </div>
+    <footer>
+        <h4 class="pt-5 footer-label">Developed by: Divesh Malhotra</h4>
+    </footer>
+</div>
